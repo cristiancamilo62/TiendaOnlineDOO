@@ -17,7 +17,6 @@ public class ClienteEntity {
 	private Date fechaNacimiento;
 
 
-
 	private ClienteEntity(final UUID id, final TipoIdentificacionEntity tipoIdentificacion, final String identificacion, final NombreCompletoClienteEntity nombreCompleto,
 			CorreoElectronicoClienteEntity correoElectronico, NumeroTelefonoClienteEntity numeroTelefono, final Date fechaNacimiento) {
 		setId(id);

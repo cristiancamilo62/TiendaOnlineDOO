@@ -31,10 +31,68 @@ public class CatalogoMensajes {
 				+ "contacte al administrador de la aplicación"));
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000005, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema "
 				+ "trantando de validar si la conexión SQL estaba abierta. Se presento una excepción de tipo SQLException. Por favor verifique"
-				+ "la traza completa del error presentado, para así poder diagnosticas con mayor certeza lo que sucedio. "));
+				+ "la traza completa del error presentado, para así poder diagnosticar con mayor certeza lo que sucedio. "));
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000006, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema "
 				+ "inesperado trantando de validar si la conexión SQL estaba abierta. Se presento una excepción generica de tipo Exception. "
-				+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticas con mayor certeza lo que sucedio. "));
+				+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticar con mayor certeza lo que sucedio. "));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000007, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "No es posible validar si una conexión "
+				+ "esta abierta cuando es nula. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000008,TipoMensaje.TECNICO,CategoriaMensaje.ERROR,"no es posible cerrar una conexión "
+				+ "que esta nula. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000009, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"no es posible cerrar una conexión "
+				+ "que ya esta cerrada. Esto se debe a que una conexión que ha sido terminada o cerrada ya "
+				+ "no se encuentra en un estado activo y operativo"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000010, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema trantando "
+				+ " de cerrar la conexion SQL. Se presento una excepción de tipo SQLException. Por favor "
+				+ "verifique la traza completa del error presentado, para poder diagnosticar "
+				+ "con mayor certeza lo que sucedio.."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000011, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema inesperado"
+				+ "trantando de cerrar la conexión SQL. Se presento una excepción generica de tipo Exception. "
+				+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticar"
+				+ "con mayor certeza lo que sucedio..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000012,TipoMensaje.TECNICO,CategoriaMensaje.ERROR,"no es posible iniciar una transacción con una"
+				+ "conexión que esta nula. No es posible continuar con el proceso.."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000013, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"no es posible iniciar una transacción con una conexión "
+				+ "cerrada. No es posible continuar con el proceso."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000014, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "no es posible iniciar una transacción que ya ha sido"
+				+ "iniciada. No es posible continuar con el proceso..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000015, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "se ha presentado un problema trantando"
+				+ "de iniciar la transacción de una la conexion SQL. Se presento una excepción de tipo SQLException. Por favor "
+				+ "verifique la traza completa del error presentado, para así poder diagnosticar"
+				+ "con mayor certeza lo que sucedio..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000016, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema"
+				+ "trantando de iniciar la transacción de una conexión SQL. Se presento una excepción generica de tipo Exception. "
+				+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticar"
+				+ "con mayor certeza lo que sucedio."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000017,TipoMensaje.TECNICO,CategoriaMensaje.ERROR,"no es posible confirmar una transacción con una"
+				+ "conexión que esta nula. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000018, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"no es posible confirmar una transacción con una conexión "
+				+ "cerrada. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000019, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "no es posible confirmar una transacción que no ha sido"
+				+ "iniciada. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000020, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema trantando"
+				+ "de confirmar la transacción de una la conexion SQL. Se presento una excepción de tipo SQLException. Por favor "
+				+ "verifique la traza completa del error presentado, para así poder diagnosticar "
+				+ "con mayor certeza lo que sucedio."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000021, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema inesperado "
+				+ "trantando de confirmar la transacción de una conexión SQL. Se presento una excepción generica de tipo Exception. "
+				+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticar "
+				+ "con mayor certeza lo que sucedio"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000022,TipoMensaje.TECNICO,CategoriaMensaje.ERROR,"no es posible cancelar una transacción con una"
+				+ "conexión que esta nula. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000023, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"no es posible cancelar una transacción con una conexión "
+				+ "cerrada. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000024, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "no es posible cancelar una transacción que no ha sido"
+				+ "iniciada. No es posible continuar con el proceso"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000025, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema trantando"
+				+ "de cancelar una transacción de una la conexion SQL. Se presento una excepción de tipo SQLException. Por favor "
+				+ "verifique la traza completa del error presentado, para así poder diagnosticar "
+				+ "con mayor certeza lo que sucedio. "));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000026, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema inesperado "
+				+ "trantando de cancelar una transacción de una conexión SQL. Se presento una excepción generica de tipo Exception. "
+				+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticar "
+				+ "con mayor certeza lo que sucedio. "));
+		
 	}
 
 	private static void agregarMensaje(final Mensaje mensaje) {

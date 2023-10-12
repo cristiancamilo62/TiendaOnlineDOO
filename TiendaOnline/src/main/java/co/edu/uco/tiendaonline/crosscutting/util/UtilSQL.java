@@ -16,14 +16,14 @@ public final class UtilSQL {
 	public static final boolean conexionAbierta(final Connection conexion) {
 		if(UtilObjeto.esNulo(conexion)) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
-			var mensajeTecnico = "No es posible validar si una coxion esta abierta cuando es nula";
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000007);
 			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
 		}
 		try {
 			return  !conexion.isClosed();
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
-			var mensajeTecnico = "No es posible validar si una coxion esta abierta cuando es nula";
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000005);
 			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
 		}catch (final Exception excepcion) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
@@ -35,13 +35,13 @@ public final class UtilSQL {
 	public static final void cerrarConexion(final Connection conexion) {
 		if(UtilObjeto.esNulo(conexion)) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
-			var mensajeTecnico = "no es posible cerrar una conexión que esta nula";
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000008);
 			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
 		}
 		try {
 			if(!conexionAbierta(conexion)) {
 				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
-				var mensajeTecnico = "no es posible cerrar una conexión que ya esta cerrada";
+				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000009);
 				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
 			}
 			conexion.close();
@@ -49,18 +49,106 @@ public final class UtilSQL {
 			throw excepcion;
 		}catch (final SQLException excepcion) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
-			var mensajeTecnico = "Se ha presentado un problema trantando de validar si la conexión "
-					+ "SQL estaba cerrada. Se presento una excepción de tipo SQLException. Por favor "
-					+ "verifique la traza completa del error presentado, para así poder diagnosticas "
-					+ "con mayor certeza lo que sucedio. ";
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000010);
 			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
 		}
 		catch (final Exception excepcion) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
-			var mensajeTecnico = "Se ha presentado un problema inesperado trantando de validar si"
-					+ "la conexión SQL estaba abierta. Se presento una excepción generica de tipo Exception. "
-					+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticas "
-					+ "con mayor certeza lo que sucedio. ";
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000011);
+			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
+		}
+	}
+	
+	public static final void iniciarTransaccion(final Connection conexion) {
+		if(UtilObjeto.esNulo(conexion)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000012);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+		}
+		try {
+			if(!conexionAbierta(conexion)) {
+				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000013);
+				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+			}
+			if(!conexion.getAutoCommit()) {
+				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000014);
+				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+			}
+			conexion.setAutoCommit(false);
+		} catch (final CrosscuttingTiendaOnlineException excepcion) {
+			throw excepcion;
+		}catch (final SQLException excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000015);
+			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
+		}
+		catch (final Exception excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000016);
+			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
+		}
+	}
+	public static final void confirmarTransaccion(final Connection conexion) {
+		if(UtilObjeto.esNulo(conexion)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000017);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+		}
+		try {
+			if(conexionAbierta(conexion)) {
+				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000018);
+				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+			}
+			if(conexion.getAutoCommit()) {
+				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000019);
+				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+			}
+			conexion.commit();
+		} catch (final CrosscuttingTiendaOnlineException excepcion) {
+			throw excepcion;
+		}catch (final SQLException excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000020);
+			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
+		}
+		catch (final Exception excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000021);
+			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
+		}
+	}
+	public static final void cancelarTransaccion(final Connection conexion) {
+		if(UtilObjeto.esNulo(conexion)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000022);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+		}
+		try {
+			if(conexionAbierta(conexion)) {
+				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000023);
+				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+			}
+			if(conexion.getAutoCommit()) {
+				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000024);
+				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
+			}
+			conexion.rollback();
+		} catch (final CrosscuttingTiendaOnlineException excepcion) {
+			throw excepcion;
+		}catch (final SQLException excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000025);
+			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
+		}
+		catch (final Exception excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000026);
 			throw CrosscuttingTiendaOnlineException.crear(excepcion,mensajeUsuario,mensajeTecnico);
 		}
 	}

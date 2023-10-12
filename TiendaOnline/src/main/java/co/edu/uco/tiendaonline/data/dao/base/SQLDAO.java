@@ -10,7 +10,7 @@ public class SQLDAO {
 		setConexion(conexion);
 	}
 
-	public final Connection getConexion() {
+	protected final Connection getConexion() {
 		return conexion;
 	}
 

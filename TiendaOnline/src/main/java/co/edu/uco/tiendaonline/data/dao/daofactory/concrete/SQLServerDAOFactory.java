@@ -1,7 +1,7 @@
 package co.edu.uco.tiendaonline.data.dao.daofactory.concrete;
 
 import java.sql.Connection;
-
+import co.edu.uco.tiendaonline.crosscutting.util.UtilSQL;
 import co.edu.uco.tiendaonline.data.dao.ClienteDAO;
 import co.edu.uco.tiendaonline.data.dao.TipoIdentificacionDAO;
 import co.edu.uco.tiendaonline.data.dao.concrete.sqlserver.ClienteSQLServerDAO;
@@ -18,32 +18,27 @@ public final class SQLServerDAOFactory extends DAOFactory {
 	
 	@Override
 	protected final void abrirConexion() {
-		// TODO: Your homework will be to obtain connection with SQL server data
 		conexion = null;
-		
 	}
 
 	@Override
 	public final void cerrarConexion() {
-		// TODO: Your homework will be to obtain connection 
-		
-	}
+		UtilSQL.cerrarConexion(conexion);
+	}	
 
 	@Override
 	public final void iniciarTransaccion() {
-		// TODO: Your homework will be to init transaction 
-		
+		UtilSQL.iniciarTransaccion(conexion);
 	}
 
 	@Override
-	public final void confirmarTransacion() {
-		// TODO: Your homework will be to commit transaction 
-		
+	public final void confirmarTransacion() { 
+		UtilSQL.confirmarTransaccion(conexion);
 	}
 
 	@Override
 	public void cancelarTransacion() {
-		// TODO: Your homework will be to rollback transaction 
+		UtilSQL.cancelarTransaccion(conexion);
 		
 	}
 
@@ -56,7 +51,6 @@ public final class SQLServerDAOFactory extends DAOFactory {
 	public TipoIdentificacionDAO obtenerTipoIdentificacionDao() {
 		return new TipoIdentificacionSQLServerDAO(conexion);
 	}
-	
 	
 
 }

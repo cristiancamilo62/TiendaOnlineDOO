@@ -2,7 +2,7 @@ package co.edu.uco.tiendaonline.crosscutting.util;
 
 public final class  UtilTexto {
 	
-	public static final String VACIO= "";
+	public static final String VACIO = "";
 	
 	private UtilTexto() {
 		super();
@@ -13,16 +13,16 @@ public final class  UtilTexto {
 	}
 	
 	public static final String aplicarTrim(final String valor){
-		return obtenerValordefecto(valor).trim();
+		return obtenerValorDefecto(valor).trim();
 		
 	}
 	
-	public static final String obtenerValordefecto(final String valor) {
+	public static final String obtenerValorDefecto(final String valor) {
 		return obtenerValorDefecto(valor, VACIO);
 	}
 	
 	public static final boolean igualSinTrim(final String primerValor, final String segundoValor) {
-		return obtenerValordefecto(primerValor).equals(obtenerValordefecto(segundoValor));
+		return obtenerValorDefecto(primerValor).equals(obtenerValorDefecto(segundoValor));
 	}
 	
 	public static final boolean igualConTrim(final String primerValor, final String segundoValor) {
@@ -30,7 +30,7 @@ public final class  UtilTexto {
 	}
 	
 	public static final boolean igualSinTrimIgnorandoCase(final String primerValor, final String segundoValor) {
-		return obtenerValordefecto(primerValor).equalsIgnoreCase(obtenerValordefecto(segundoValor));
+		return obtenerValorDefecto(primerValor).equalsIgnoreCase(obtenerValorDefecto(segundoValor));
 	}
 	
 	public static final boolean igualConTrimIgnoreCase(final String primerValor, final String segundoValor) {
