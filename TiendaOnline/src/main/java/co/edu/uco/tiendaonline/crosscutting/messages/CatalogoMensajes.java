@@ -26,7 +26,7 @@ public class CatalogoMensajes {
 				+ "mensaje con el código indicado. No es posible continuar con el proceso..."));
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000003, TipoMensaje.TECNICO, CategoriaMensaje.FATAL, "No es posible onbtener "
 				+ "un mensaje con un codigo vacio o nulo. No es posible continuar con el proceso..."));
-		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000004, TipoMensaje.TECNICO, CategoriaMensaje.FATAL, "Se a presentado un problema "
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000004, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se a presentado un problema "
 				+ "inesperado tratando de llevar a cabo la operación deseada. Por favor intente de nuevo y si el problema persiste, "
 				+ "contacte al administrador de la aplicación"));
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000005, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema "
@@ -92,8 +92,16 @@ public class CatalogoMensajes {
 				+ "trantando de cancelar una transacción de una conexión SQL. Se presento una excepción generica de tipo Exception. "
 				+ "Por favor verifique la traza completa del error presentado, para así poder diagnosticar "
 				+ "con mayor certeza lo que sucedio. "));
-		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000027, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema en el metodo toDomain de la clase "
+				+ "TipoIdentificacionEntityMapper. No es posible mapear un tipo de Identificación Dominio a partir de una entidad de tipo Identificación entity nula."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000028, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema en el metodo toEntity de la clase "
+				+ "TipoIdentificacionEntityMapper.No es posible mapear un tipo de Identificación Entity a partir de un domain de tipo Identificación entity nula."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000029, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema tratando de llevar a cabo el "
+				+ "registro de la inofrmación del nuevo tipo de identificación"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000030, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema en el metodo setFactoria de la clase"
+				+ " RegistrarTipoIdentificacionUseCase debido a que la factoria con la cual se desea crear esta nula."));
 	}
+	
 
 	private static void agregarMensaje(final Mensaje mensaje) {
 		MENSAJES.put(mensaje.getCodigo(), mensaje);
