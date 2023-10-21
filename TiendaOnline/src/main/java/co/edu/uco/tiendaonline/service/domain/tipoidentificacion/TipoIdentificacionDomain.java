@@ -1,4 +1,4 @@
-package co.edu.uco.tiendaonline.service.domain;
+package co.edu.uco.tiendaonline.service.domain.tipoidentificacion;
 
 import java.util.UUID;
 

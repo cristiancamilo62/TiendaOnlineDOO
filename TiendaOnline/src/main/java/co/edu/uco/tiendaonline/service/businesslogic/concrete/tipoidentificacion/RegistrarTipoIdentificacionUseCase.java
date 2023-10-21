@@ -1,11 +1,8 @@
 package co.edu.uco.tiendaonline.service.businesslogic.concrete.tipoidentificacion;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.swing.text.html.parser.Entity;
 
 import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnlineException;
 import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
@@ -15,7 +12,8 @@ import co.edu.uco.tiendaonline.data.dao.TipoIdentificacionDAO;
 import co.edu.uco.tiendaonline.data.dao.daofactory.DAOFactory;
 import co.edu.uco.tiendaonline.data.entity.TipoIdentificacionEntity;
 import co.edu.uco.tiendaonline.service.businesslogic.UseCase;
-import co.edu.uco.tiendaonline.service.domain.TipoIdentificacionDomain;
+import co.edu.uco.tiendaonline.service.businesslogic.validator.concrete.tipoidentificacion.RegistrarTipoIdentificacionValidator;
+import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.TipoIdentificacionDomain;
 import co.edu.uco.tiendaonline.service.mapper.entity.concrete.TipoIdentificacionEntityMapper;
 
 public final class RegistrarTipoIdentificacionUseCase  implements UseCase<TipoIdentificacionDomain>{
@@ -30,9 +28,8 @@ public final class RegistrarTipoIdentificacionUseCase  implements UseCase<TipoId
 
 	@Override
 	public final void execute(TipoIdentificacionDomain domain) {
-		
-		//1. verificar la integridad de los datos
-		//TODO: ¿como lo hago?
+
+		RegistrarTipoIdentificacionValidator.ejecutarValidacion(domain);
 		
 		validarNoexistenciaTipoIdentificacionConMismoCodigo(domain.getCodigo());
 		
@@ -44,32 +41,39 @@ public final class RegistrarTipoIdentificacionUseCase  implements UseCase<TipoId
 		
 	}
 	
+	
 	private void registrarNuevoTipoIdentificacion(final TipoIdentificacionDomain domain) {
 		var entity = TipoIdentificacionEntityMapper.convertToEntity(domain);
 		getTipoIdentificacionDAO().crear(entity);
 	}
 
 	private final void validarNoexistenciaTipoIdentificacionConMismoNombre(final String nombre) {
-		// TODO: ¿cómo lograr que esto no este tan feo?????
-		var domain = TipoIdentificacionDomain.crear(null, null, nombre, false);
-		var entity = TipoIdentificacionEntityMapper.convertToEntity(domain);
-		var resultados = getTipoIdentificacionDAO().consultar(entity);
-		
-		if(!resultados.isEmpty()) {
-			var mensajeUsuario = "ya existe un Tipo de identificación con el nombre : "+ nombre;
-			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
-		}
+	    var entity = crearTipoIdentificacionEntityNombre(nombre);
+	    var resultados = getTipoIdentificacionDAO().consultar(entity);
+	    
+	    if (!resultados.isEmpty()) {
+	        String mensajeUsuario = "Ya existe un Tipo de identificación con el nombre: " + nombre;
+	        throw ServiceTiendaOnlineException.crear(mensajeUsuario);
+	    }
 	}
+
+	private TipoIdentificacionEntity crearTipoIdentificacionEntityNombre(final String nombre) {
+	    var domain = TipoIdentificacionDomain.crear(null, null, nombre, false);
+	    return TipoIdentificacionEntityMapper.convertToEntity(domain);
+	}
+	
 	private final void validarNoexistenciaTipoIdentificacionConMismoCodigo(final String codigo) {
-		// TODO: ¿cómo lograr que esto no este tan feo?????
-		var domain = TipoIdentificacionDomain.crear(null, codigo, null, false);
-		var entity = TipoIdentificacionEntityMapper.convertToEntity(domain);
+		TipoIdentificacionEntity entity = crearTipoIdentificacionEntityCodigo(codigo);
 		var resultados = getTipoIdentificacionDAO().consultar(entity);
 		
 		if(!resultados.isEmpty()) {
 			var mensajeUsuario = "ya existe un Tipo de identificación con el codigio: "+ codigo;
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
+	}
+	private final TipoIdentificacionEntity crearTipoIdentificacionEntityCodigo(final String codigo) {
+	    var domain = TipoIdentificacionDomain.crear(null, codigo, null, false);
+	    return TipoIdentificacionEntityMapper.convertToEntity(domain);
 	}
 	
 	private final TipoIdentificacionDomain obtenerIdentificadorTipoIdentificacion(final TipoIdentificacionDomain domain) {
@@ -90,10 +94,8 @@ public final class RegistrarTipoIdentificacionUseCase  implements UseCase<TipoId
 	}
 	
 	private final TipoIdentificacionDAO getTipoIdentificacionDAO() {
-		return getFactoria().obtenerTipoIdentificacionDao();
+		return getFactoria().obtenerTipoIdentificacionDAO();
 	}
-
-
 
 	private final void setFactoria(final DAOFactory factoria) {
 		if(UtilObjeto.esNulo(factoria)) {

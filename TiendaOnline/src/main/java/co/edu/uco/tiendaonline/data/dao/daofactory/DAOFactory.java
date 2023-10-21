@@ -1,5 +1,8 @@
 package co.edu.uco.tiendaonline.data.dao.daofactory;
 
+import co.edu.uco.tiendaonline.crosscutting.exception.concrete.CrosscuttingTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
+import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.data.dao.ClienteDAO;
 import co.edu.uco.tiendaonline.data.dao.TipoIdentificacionDAO;
 import co.edu.uco.tiendaonline.data.dao.daofactory.concrete.SQLServerDAOFactory;
@@ -13,19 +16,25 @@ public abstract class DAOFactory {
 			return new SQLServerDAOFactory();
 		}
 		case POSTGRESQL: {
-			//TODO: Falta mejorar el manejos de excepciones customizadas
-			throw new RuntimeException("Factoria no soportada");
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000036);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
 		}
-		case MYSQL : {
-			//TODO: Falta mejorar el manejos de excepciones customizadas
-			throw new RuntimeException("Factoria no soportada");
+		case MYSQL: {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000037);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
 		}
-		case ORACLE : {
-			//TODO: Falta mejorar el manejos de excepciones customizadas
-			throw new RuntimeException("Factoria no soportada");
+		case ORACLE: {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000038);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
 		}
 		default:
-			throw new RuntimeException("Factoria no soportada");
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000039);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
+
 		}
 	}
 	protected abstract void abrirConexion();
@@ -33,6 +42,7 @@ public abstract class DAOFactory {
 	public abstract void iniciarTransaccion();
 	public abstract void confirmarTransacion();
 	public abstract void cancelarTransacion();
-	public abstract ClienteDAO obtenerClienteDao();
-	public abstract TipoIdentificacionDAO obtenerTipoIdentificacionDao();
+	public abstract ClienteDAO obtenerClienteDAO();
+	public abstract TipoIdentificacionDAO obtenerTipoIdentificacionDAO();
+
 }

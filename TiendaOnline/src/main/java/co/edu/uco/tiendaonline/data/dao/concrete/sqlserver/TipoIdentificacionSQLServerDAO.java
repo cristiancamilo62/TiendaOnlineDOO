@@ -50,7 +50,7 @@ public final class TipoIdentificacionSQLServerDAO extends SQLDAO implements Tipo
 					+ "TipoIdentificaciónSQLServer tratando de llevar a cabo el registro del nuevo TipoIdentificacion"
 					+ "Por favor revise la traza del problema presentado para así poder identificar que sucedio.";
 			throw DataTiendaOnlineException.crear(excepcion, mensajeUsuario, mensajeTecnico);
-		}
+		} 
 	}
 
 	@Override

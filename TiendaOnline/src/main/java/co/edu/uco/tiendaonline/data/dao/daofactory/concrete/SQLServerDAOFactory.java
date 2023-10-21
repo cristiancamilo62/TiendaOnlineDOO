@@ -1,6 +1,13 @@
 package co.edu.uco.tiendaonline.data.dao.daofactory.concrete;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import co.edu.uco.tiendaonline.crosscutting.exception.concrete.CrosscuttingTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.exception.concrete.DataTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
+import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilSQL;
 import co.edu.uco.tiendaonline.data.dao.ClienteDAO;
 import co.edu.uco.tiendaonline.data.dao.TipoIdentificacionDAO;
@@ -18,7 +25,19 @@ public final class SQLServerDAOFactory extends DAOFactory {
 	
 	@Override
 	protected final void abrirConexion() {
-		conexion = null;
+		try {
+			var cadenaConexion = "jdbc:sqlserver://<server>:<port>;encrypt=false;databaseName=<database>;user=<user>;password=<password>";
+			conexion = DriverManager.getConnection(cadenaConexion);
+		} catch (final SQLException excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000032);
+			throw DataTiendaOnlineException.crear(excepcion, mensajeUsuario, mensajeTecnico);
+		} catch (final Exception excepcion) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000033);
+			throw DataTiendaOnlineException.crear(excepcion, mensajeUsuario, mensajeTecnico);
+		}
+
 	}
 
 	@Override
@@ -42,15 +61,33 @@ public final class SQLServerDAOFactory extends DAOFactory {
 		
 	}
 
+
 	@Override
-	public ClienteDAO obtenerClienteDao() {
+	public ClienteDAO obtenerClienteDAO() {
+
+		if (!UtilSQL.conexionAbierta(conexion)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000034);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
+		}
+
 		return new ClienteSQLServerDAO(conexion);
+
+		
 	}
 
 	@Override
-	public TipoIdentificacionDAO obtenerTipoIdentificacionDao() {
+	public TipoIdentificacionDAO obtenerTipoIdentificacionDAO() {
+		if (!UtilSQL.conexionAbierta(conexion)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000035);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
+		}
+
 		return new TipoIdentificacionSQLServerDAO(conexion);
+
 	}
+
 	
 
 }

@@ -100,6 +100,29 @@ public class CatalogoMensajes {
 				+ "registro de la inofrmación del nuevo tipo de identificación"));
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000030, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema en el metodo setFactoria de la clase"
 				+ " RegistrarTipoIdentificacionUseCase debido a que la factoria con la cual se desea crear esta nula."));
+		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000031, TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "Se ha presentado un problema en el metodo setFactoria de la clase"
+				+ " RegistrarTipoIdentificacionUseCase debido a que la factoria con la cual se desea crear esta nula."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000032, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"Se ha presentado un problema tratando de obtener la conexión con SQL Server. Se presentó una excepción de tipo SQLException. Por favor verifique la traza completa del error presentado, para así poder diagnosticar con mayor certeza qué sucedió..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000033, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"Se ha presentado un problema inesperado tratando de obtener la conexión con SQL Server. Se presentó una excepción genérica de tipo Exception. Por favor verifique la traza completa del error presentado, para así poder diagnosticar con mayor certeza qué sucedió..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000034, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"Se ha presentado un problema tratando de obtener el DAO de ClienteSQLServerDAO debido a que la conexiòn actualmente està cerrada, por lo que no hay una conexiòn vàlida disponible..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000035, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"Se ha presentado un problema tratando de obtener el DAO de TipoIdentificacionSQLServerDAO debido a que la conexiòn actualmente està cerrada, por lo que no hay una conexiòn vàlida disponible..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000036, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"La Factorìa de datos para PostgreSQL no se encuentra implementada..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000037, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"La Factorìa de datos para MySQL no se encuentra implementada..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000038, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"La Factorìa de datos para Oracle no se encuentra implementada..."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000039, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,
+				"La Factorìa de datos deseada no se encuentra implementada..."));
+
+
+
+
 	}
 	
 
