@@ -1,6 +1,11 @@
 package co.edu.uco.tiendaonline.service.mapper.dto.concrete;
 
 
+import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
+import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
+import co.edu.uco.tiendaonline.crosscutting.util.UtilObjeto;
+import co.edu.uco.tiendaonline.data.entity.TipoIdentificacionEntity;
 import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.TipoIdentificacionDomain;
 import co.edu.uco.tiendaonline.service.dto.TipoIdentificacionDTO;
 import co.edu.uco.tiendaonline.service.mapper.dto.DTOMapper;
@@ -13,16 +18,26 @@ public class TipoIdentificacionDTOMapper implements DTOMapper<TipoIdentificacion
 	private TipoIdentificacionDTOMapper() {
 		super();
 	}
-
 	@Override
-	public final TipoIdentificacionDomain toDomain(final TipoIdentificacionDTO entity) {
+	public final TipoIdentificacionDomain toDomain(final TipoIdentificacionDTO dto) {
 		
-		return  null;
+		if(UtilObjeto.esNulo(dto)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000027);
+			throw ServiceTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
+		}
+		return TipoIdentificacionDomain.crear(dto.getId(), dto.getCodigo(), dto.getNombre(), dto.isEstado());
 	}
+
 
 	@Override
 	public final TipoIdentificacionDTO toDTO(final TipoIdentificacionDomain domain) {
-		return null;
+		if(UtilObjeto.esNulo(domain)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000028);
+			throw ServiceTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
+		}
+		return TipoIdentificacionDTO.crear(domain.getId(), domain.getCodigo(), domain.getNombre(), domain.isEstado());
 	}
 	
 	public static final TipoIdentificacionDomain convertToDomain(final TipoIdentificacionDTO entity) {

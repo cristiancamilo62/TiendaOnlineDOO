@@ -24,22 +24,22 @@ import co.edu.uco.tiendaonline.service.facade.concrete.tipoidentificacion.Regist
 public class TipoIdentificacionController {
 	
 	@GetMapping("/dummy")
-	public TipoIdentificacionDTO obtenerDummy() {
+	public final TipoIdentificacionDTO obtenerDummy() {
 		return TipoIdentificacionDTO.crear();
 	}
-	
+
 	@GetMapping
-	public TipoIdentificacionDTO consultar(@RequestBody TipoIdentificacionDTO dto) {
+	public final TipoIdentificacionDTO consultar(@RequestBody TipoIdentificacionDTO dto) {
 		return dto;
 	}
 	
 	@GetMapping("/{id}")
-	public UUID consultarPorId(@PathVariable("id") UUID id) {
+	public final UUID consultarPorId(@PathVariable("id") UUID id) {
 		return id;
 	}
 	
 
-	@PostMapping
+	@PostMapping()
 	public final ResponseEntity<Respuesta<TipoIdentificacionDTO>> registrar(@RequestBody TipoIdentificacionDTO dto) {
 		
 		final Respuesta<TipoIdentificacionDTO> respuesta = new Respuesta<>();
@@ -59,20 +59,23 @@ public class TipoIdentificacionController {
 			System.err.println(excepcion.getLugar());
 			excepcion.getExceptionRaiz().printStackTrace();
 			//TODO: hacer logger de la excepcion
+			
 		}catch (final Exception excepcion) {
 			respuesta.getMensajes().add("se ha presentado un problema tratando de resgistrar el tipo de identificacion");
+			excepcion.printStackTrace();
+			//TODO: hacer logger de la excepcion
 		}
 		return new ResponseEntity<>(respuesta,codigoHttp);
 	}
 	
 	@PutMapping("{id}")
-	public TipoIdentificacionDTO modificar(@PathVariable("id") UUID id,@RequestBody TipoIdentificacionDTO dto) {
+	public final TipoIdentificacionDTO modificar(@PathVariable("id") UUID id,@RequestBody TipoIdentificacionDTO dto) {
 		dto.setId(id);
 		return dto;
 	}
 	
 	@DeleteMapping("/{id}")
-	public UUID eliminar(@PathVariable("id") UUID id) {
+	public final UUID eliminar(@PathVariable("id") UUID id) {
 		return id;
 	}
 	

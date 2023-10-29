@@ -23,10 +23,5 @@ public final class RegistrarTipoIdentificacionValidator implements Validator<Tip
 		TipoIdentificacionValidationRule.ejecutarValidacion(data);
 		CodigoTipoIdentificacionValidationRule.ejecutarValidacion(data.getCodigo());
 		NombreTipoIdentificacionValidationRule.ejecutarValidacion(data.getNombre());
-		
-		
 	}
-
-	
-
 }

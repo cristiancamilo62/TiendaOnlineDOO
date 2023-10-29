@@ -50,7 +50,6 @@ public final class RegistrarTipoIdentificacionUseCase  implements UseCase<TipoId
 	private final void validarNoexistenciaTipoIdentificacionConMismoNombre(final String nombre) {
 	    var entity = crearTipoIdentificacionEntityNombre(nombre);
 	    var resultados = getTipoIdentificacionDAO().consultar(entity);
-	    
 	    if (!resultados.isEmpty()) {
 	        String mensajeUsuario = "Ya existe un Tipo de identificación con el nombre: " + nombre;
 	        throw ServiceTiendaOnlineException.crear(mensajeUsuario);

@@ -26,7 +26,7 @@ public final class SQLServerDAOFactory extends DAOFactory {
 	@Override
 	protected final void abrirConexion() {
 		try {
-			var cadenaConexion = "jdbc:sqlserver://<server>:<port>;encrypt=false;databaseName=<database>;user=<user>;password=<password>";
+			var cadenaConexion = "jdbc:sqlserver://server-tienda-online-sandbox.database.windows.net:1433;encrypt=false;databaseName=BD_TIENDA_ONLINE_SANDBOX;user=usrTiendaOnline;password=usrT13nd40nl1n3";
 			conexion = DriverManager.getConnection(cadenaConexion);
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);

@@ -2,6 +2,8 @@ package co.edu.uco.tiendaonline.service.facade.concrete.tipoidentificacion;
 
 import co.edu.uco.tiendaonline.crosscutting.exception.TiendaOnlineException;
 import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
+import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.data.dao.daofactory.DAOFactory;
 import co.edu.uco.tiendaonline.data.dao.daofactory.TipoDAOFactory;
 import co.edu.uco.tiendaonline.service.businesslogic.concrete.tipoidentificacion.RegistrarTipoIdentificacionUseCase;
@@ -33,8 +35,8 @@ public final class RegistrarTipoIdentificacionFacade implements Facade<TipoIdent
 			throw exception;
 		}catch (final Exception exception) {
 			daoFactory.cancelarTransacion();
-			var mensajeUsuario = "Se ha presentado un problema inesperado tratando de registrar un nuevo tipo de identificación";
-			var mensajeTecnico = "";
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000043);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000044);
 			throw ServiceTiendaOnlineException.crear(exception, mensajeUsuario,mensajeTecnico);
 		}
 		finally {

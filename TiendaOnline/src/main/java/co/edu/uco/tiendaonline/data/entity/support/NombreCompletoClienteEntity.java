@@ -1,10 +1,19 @@
 package co.edu.uco.tiendaonline.data.entity.support;
 
+import co.edu.uco.tiendaonline.crosscutting.util.UtilTexto;
+
 public class NombreCompletoClienteEntity {
 	private String primerNombre;
 	private String segundoNombre;
 	private String primerApellido;
 	private String segundoApellido;
+	
+	public NombreCompletoClienteEntity() {
+		setPrimerNombre(UtilTexto.VACIO);
+		setSegundoNombre(UtilTexto.VACIO);
+		setPrimerApellido(UtilTexto.VACIO);
+		setSegundoApellido(UtilTexto.VACIO);
+	}
 	
 	private NombreCompletoClienteEntity(final String primerNombre, final String segundoNombre, final String primerApellido,
 			final String segundoApellido) {
@@ -16,6 +25,10 @@ public class NombreCompletoClienteEntity {
 	public static final NombreCompletoClienteEntity crear(final String primerNombre, final String segundoNombre, final String primerApellido,
 			final String segundoApellido) {
 		return new NombreCompletoClienteEntity(primerNombre, segundoNombre, primerApellido, segundoApellido);
+	}
+	
+	public static final  NombreCompletoClienteEntity crear(){
+		return new NombreCompletoClienteEntity();
 	}
 	
 	public final String getPrimerNombre() {
@@ -31,16 +44,21 @@ public class NombreCompletoClienteEntity {
 		return segundoApellido;
 	}
 	private final void setPrimerNombre(final String primerNombre) {
-		this.primerNombre = primerNombre;
+		this.primerNombre = UtilTexto.obtenerValorDefecto(primerNombre);
 	}
 	private final void setSegundoNombre(final String segundoNombre) {
-		this.segundoNombre = segundoNombre;
+		this.segundoNombre = UtilTexto.obtenerValorDefecto(segundoNombre);
 	}
 	private final void setPrimerApellido(final String primerApellido) {
-		this.primerApellido = primerApellido;
+		this.primerApellido = UtilTexto.obtenerValorDefecto(primerApellido);
 	}
 	private final void setSegundoApellido(final String segundoApellido) {
-		this.segundoApellido = segundoApellido;
+		this.segundoApellido = UtilTexto.obtenerValorDefecto(segundoApellido);
+	}
+	@Override
+	public String toString() {
+		return "NombreCompletoClienteEntity [primerNombre=" + primerNombre + ", segundoNombre=" + segundoNombre
+				+ ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + "]";
 	}
 	
 	

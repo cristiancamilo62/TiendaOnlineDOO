@@ -2,7 +2,7 @@ package co.edu.uco.tiendaonline.service.domain.tipoidentificacion;
 
 import java.util.UUID;
 
-public class TipoIdentificacionDomain {
+public final class TipoIdentificacionDomain {
 	
 	private UUID id;
 	private String codigo;

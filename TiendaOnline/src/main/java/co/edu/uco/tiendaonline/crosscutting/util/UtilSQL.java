@@ -97,7 +97,7 @@ public final class UtilSQL {
 			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
 		}
 		try {
-			if(conexionAbierta(conexion)) {
+			if(!conexionAbierta(conexion)) {
 				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
 				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000018);
 				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
@@ -128,7 +128,7 @@ public final class UtilSQL {
 			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);
 		}
 		try {
-			if(conexionAbierta(conexion)) {
+			if(!conexionAbierta(conexion)) {
 				var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
 				var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000023);
 				throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario,mensajeTecnico);

@@ -1,10 +1,14 @@
 package co.edu.uco.tiendaonline.crosscutting.util;
 
+
 public final class  UtilTexto {
 	
 	public static final String VACIO = "";
+	private static final String PATTERN_SOLO_DIGITOS = "\\d+";
 	private static final String PATTERN_SOLO_LETRAS = "^[A-Za-záéíóúÁÉÍÓÚ]+$";
+	private static final String PATTERN_SOLO_LETRAS_DIGITOS = "^[0-9A-Za-záéíóúÁÉÍÓÚ]+$";
 	private static final String PATTERN_SOLO_LETRAS_DIGITOS_ESPACIOS = "^[0-9A-Za-záéíóúÁÉÍÓÚ ]+$";
+	private static final String PATTERN_SOLO_LETRAS_DIGITOS_ARROBA_DOMINIO = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 	
 	private UtilTexto() {
 		super();
@@ -59,5 +63,13 @@ public final class  UtilTexto {
 	public static boolean contieneSoloLetrasDigitosEspacios(final String valor) {
 	    return aplicarTrim(valor).matches(PATTERN_SOLO_LETRAS_DIGITOS_ESPACIOS);
 	}
-	
+	public static boolean contieneSoloLetrasDigitosArrobaDominio(final String valor) {
+		return aplicarTrim(valor).matches(PATTERN_SOLO_LETRAS_DIGITOS_ARROBA_DOMINIO);
+	}
+	public static final boolean contieneSoloDigitos(final String valor) {
+		return aplicarTrim(valor).matches(PATTERN_SOLO_DIGITOS);
+	}
+	public static final boolean contieneSoloLetrasDigitos(final String valor) {
+		return aplicarTrim(valor).matches(PATTERN_SOLO_LETRAS_DIGITOS);
+	}
 }

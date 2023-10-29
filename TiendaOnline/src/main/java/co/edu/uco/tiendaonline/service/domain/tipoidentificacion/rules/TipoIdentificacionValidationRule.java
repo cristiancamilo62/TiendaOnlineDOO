@@ -20,8 +20,8 @@ public final class TipoIdentificacionValidationRule  implements ValidationRule<T
 	}
 
 	@Override
-	public void validar(TipoIdentificacionDomain dato) {
-		if(UtilObjeto.esNulo(null)) {
+	public void validar(final TipoIdentificacionDomain dato) {
+		if(UtilObjeto.esNulo(dato)) {
 			var mensajeUsuario = "No es posible realizar la operacion con un tipo de identificación nulo";
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}

@@ -1,14 +1,16 @@
-package co.edu.uco.tiendaonline.service.domain.tipoidentificacion.rules;
+package co.edu.uco.tiendaonline.service.domain.cliente.rules;
 
 import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
+import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilTexto;
 import co.edu.uco.tiendaonline.service.domain.ValidationRule;
 
-public final class CodigoTipoIdentificacionValidationRule implements ValidationRule<String>{
+public final class NumeroIdentificacionClienteValidationRule implements ValidationRule<String>{
+
+private static final ValidationRule<String> instancia = new NumeroIdentificacionClienteValidationRule();
 	
-	private static final ValidationRule<String> instancia = new CodigoTipoIdentificacionValidationRule();
-	
-	private CodigoTipoIdentificacionValidationRule() {
+	private NumeroIdentificacionClienteValidationRule() {
 		super();
 	}
 	
@@ -17,7 +19,7 @@ public final class CodigoTipoIdentificacionValidationRule implements ValidationR
 	}
 
 	@Override
-	public final void validar(final String dato) {
+	public void validar(String dato) {
 		validarLongitud(dato);
 		validarObligatoriedad(dato);
 		validarFormato(dato);
@@ -26,26 +28,25 @@ public final class CodigoTipoIdentificacionValidationRule implements ValidationR
 	
 	private final void validarLongitud(final String dato) {
 		if(!UtilTexto.longitudMaximaValida(dato,50)) {
-			var mensajeUsuario = "La longitud del codigo del tipo de identificacion no en valida.La longitud maxima es 50 caracteres";
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000061);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
 	}
 	
 	private final void validarObligatoriedad(final String dato) {
 		if(UtilTexto.estaVacio(dato)) {
-			var mensajeUsuario = "El código del tipo de identificacion es oblgatorio";
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000062);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
 		
 		
 	}
 	private final void validarFormato(final String dato) {
-		if(!UtilTexto.contieneSoloLetras(dato)) {
-			var mensajeUsuario = "El código del tipo de identificación solo debe contener letras";
+		if(!UtilTexto.contieneSoloDigitos(dato)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000063);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
 		
 		
 	}
-	
 }

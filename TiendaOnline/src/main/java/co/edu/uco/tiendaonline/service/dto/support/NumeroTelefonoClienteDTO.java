@@ -1,16 +1,19 @@
 package co.edu.uco.tiendaonline.service.dto.support;
 
+import co.edu.uco.tiendaonline.crosscutting.util.UtilTexto;
+
 public class NumeroTelefonoClienteDTO {
 	private String numeroTelefono;
 	private boolean numeroTelefonoConfirmado;
 	
-	private NumeroTelefonoClienteDTO(final String numeroTelefono, final boolean numeroTelefonoConfirmado) {
-		setNumeroTelefono(numeroTelefono);
-		setNumeroTelefonoConfirmado(numeroTelefonoConfirmado);
+	public NumeroTelefonoClienteDTO() {
+		setNumeroTelefono(UtilTexto.VACIO);
+		setNumeroTelefonoConfirmado(false);
 	}
 	
-	public static final NumeroTelefonoClienteDTO crear(final String numeroTelefono, final boolean numeroTelefonoConfirmado) {
-		return new NumeroTelefonoClienteDTO(numeroTelefono, numeroTelefonoConfirmado);
+	public NumeroTelefonoClienteDTO(final String numeroTelefono, final boolean numeroTelefonoConfirmado) {
+		setNumeroTelefono(numeroTelefono);
+		setNumeroTelefonoConfirmado(numeroTelefonoConfirmado);
 	}
 
 	public final String getNumeroTelefono() {
@@ -21,12 +24,14 @@ public class NumeroTelefonoClienteDTO {
 		return numeroTelefonoConfirmado;
 	}
 
-	private final void setNumeroTelefono(final String numeroTelefono) {
+	private final NumeroTelefonoClienteDTO setNumeroTelefono(final String numeroTelefono) {
 		this.numeroTelefono = numeroTelefono;
+		return this;
 	}
 
-	private final void setNumeroTelefonoConfirmado(final boolean numeroTelefonoConfirmado) {
+	private final NumeroTelefonoClienteDTO setNumeroTelefonoConfirmado(final boolean numeroTelefonoConfirmado) {
 		this.numeroTelefonoConfirmado = numeroTelefonoConfirmado;
+		return this;
 	}
 
 	

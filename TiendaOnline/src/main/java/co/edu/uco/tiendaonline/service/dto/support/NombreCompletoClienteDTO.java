@@ -1,21 +1,25 @@
 package co.edu.uco.tiendaonline.service.dto.support;
 
+import co.edu.uco.tiendaonline.crosscutting.util.UtilTexto;
+
 public class NombreCompletoClienteDTO {
 	private String primerNombre;
 	private String segundoNombre;
 	private String primerApellido;
 	private String segundoApellido;
 	
-	private NombreCompletoClienteDTO(final String primerNombre, final String segundoNombre, final String primerApellido,
+	public NombreCompletoClienteDTO(){
+		setPrimerNombre(UtilTexto.VACIO);
+		setSegundoNombre(UtilTexto.VACIO);
+		setPrimerApellido(UtilTexto.VACIO);
+		setSegundoApellido(UtilTexto.VACIO);
+	}
+	public NombreCompletoClienteDTO(final String primerNombre, final String segundoNombre, final String primerApellido,
 			final String segundoApellido) {
 		setPrimerNombre(primerNombre);
 		setSegundoNombre(segundoNombre);
 		setPrimerApellido(primerApellido);
 		setSegundoApellido(segundoApellido);
-	}
-	public static final NombreCompletoClienteDTO crear(final String primerNombre, final String segundoNombre, final String primerApellido,
-			final String segundoApellido) {
-		return new NombreCompletoClienteDTO(primerNombre, segundoNombre, primerApellido, segundoApellido);
 	}
 	
 	public final String getPrimerNombre() {
@@ -30,17 +34,21 @@ public class NombreCompletoClienteDTO {
 	public final String getSegundoApellido() {
 		return segundoApellido;
 	}
-	private final void setPrimerNombre(final String primerNombre) {
+	private final NombreCompletoClienteDTO setPrimerNombre(final String primerNombre) {
 		this.primerNombre = primerNombre;
+		return this;
 	}
-	private final void setSegundoNombre(final String segundoNombre) {
+	private final NombreCompletoClienteDTO setSegundoNombre(final String segundoNombre) {
 		this.segundoNombre = segundoNombre;
+		return this;
 	}
-	private final void setPrimerApellido(final String primerApellido) {
+	private final NombreCompletoClienteDTO setPrimerApellido(final String primerApellido) {
 		this.primerApellido = primerApellido;
+		return this;
 	}
-	private final void setSegundoApellido(final String segundoApellido) {
+	private final NombreCompletoClienteDTO setSegundoApellido(final String segundoApellido) {
 		this.segundoApellido = segundoApellido;
+		return this;
 	}
 	
 	

@@ -2,6 +2,11 @@ package co.edu.uco.tiendaonline.data.dao.base;
 
 import java.sql.Connection;
 
+import co.edu.uco.tiendaonline.crosscutting.exception.concrete.CrosscuttingTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
+import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
+import co.edu.uco.tiendaonline.crosscutting.util.UtilSQL;
+
 public class SQLDAO {
 	
 	private Connection conexion;
@@ -15,9 +20,14 @@ public class SQLDAO {
 	}
 
 	private final  void setConexion(final Connection conexion) {
-		//TODO: controlar que la conexion no sea nula, que no esté cerrada o
-		// que ya no se haya confirmado una transacción
-		this.conexion = conexion;
+		if(!UtilSQL.conexionAbierta(conexion)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000004);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000040);
+			throw CrosscuttingTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
+		}
+
+		this.conexion = conexion;	
+		
 	}
 
 	
