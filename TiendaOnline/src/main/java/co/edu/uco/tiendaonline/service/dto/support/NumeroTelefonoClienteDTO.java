@@ -16,6 +16,13 @@ public class NumeroTelefonoClienteDTO {
 		setNumeroTelefonoConfirmado(numeroTelefonoConfirmado);
 	}
 
+	public static final NumeroTelefonoClienteDTO crear (final String numeroTelefono, final boolean numeroTelefonoConfirmado) {
+		return new NumeroTelefonoClienteDTO(numeroTelefono, numeroTelefonoConfirmado);
+	}
+	
+	public static final NombreCompletoClienteDTO crear() {
+		return new NombreCompletoClienteDTO();
+	}
 	public final String getNumeroTelefono() {
 		return numeroTelefono;
 	}

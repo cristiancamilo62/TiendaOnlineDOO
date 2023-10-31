@@ -9,13 +9,13 @@ import co.edu.uco.tiendaonline.service.domain.cliente.rules.NombreCompletoClient
 import co.edu.uco.tiendaonline.service.domain.cliente.rules.NumeroIdentificacionClienteValidationRule;
 import co.edu.uco.tiendaonline.service.domain.cliente.rules.NumeroTelefonoClienteValidationRule;
 
+public final class ModificarClienteValidator implements Validator<ClienteDomain>{
 
-public final class RegistrarClienteValidator implements Validator<ClienteDomain> {
 	
+
+	private static final Validator<ClienteDomain> instancia = new ModificarClienteValidator();
 	
-	private static final Validator<ClienteDomain> instancia = new RegistrarClienteValidator();
-	
-	private  RegistrarClienteValidator() {
+	private  ModificarClienteValidator() {
 		super();
 	}
 	

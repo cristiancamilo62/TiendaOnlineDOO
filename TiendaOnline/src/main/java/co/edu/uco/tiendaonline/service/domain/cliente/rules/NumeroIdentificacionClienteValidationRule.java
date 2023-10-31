@@ -8,7 +8,7 @@ import co.edu.uco.tiendaonline.service.domain.ValidationRule;
 
 public final class NumeroIdentificacionClienteValidationRule implements ValidationRule<String>{
 
-private static final ValidationRule<String> instancia = new NumeroIdentificacionClienteValidationRule();
+	private static final ValidationRule<String> instancia = new NumeroIdentificacionClienteValidationRule();
 	
 	private NumeroIdentificacionClienteValidationRule() {
 		super();

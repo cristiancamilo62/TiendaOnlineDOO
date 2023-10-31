@@ -21,9 +21,9 @@ public final class NombreCompletoClienteValidationRule implements ValidationRule
 	
 
 	@Override
-	public final void validar(NombreCompletoClienteDomain dato) {
-		validarLongitud(dato);
+	public final void validar(final NombreCompletoClienteDomain dato) {
 		validarObligatoriedad(dato);
+		validarLongitud(dato);
 		validarFormato(dato);
 	}
 
@@ -36,21 +36,21 @@ public final class NombreCompletoClienteValidationRule implements ValidationRule
 		
 	}
 	private final void validarLongitudPrimerNombre(final NombreCompletoClienteDomain dato) {
-		if(UtilTexto.longitudMaximaValida(dato.getPrimerNombre(),10)) {
+		if(!UtilTexto.longitudMaximaValida(dato.getPrimerNombre(),10)) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000051);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
 	}
 
 	private final void validarLongitudSegundoNombre(final NombreCompletoClienteDomain dato) {
-		if(UtilTexto.longitudMaximaValida(dato.getSegundoNombre(),10)) {
+		if(!UtilTexto.longitudMaximaValida(dato.getSegundoNombre(),10)) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000052);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
 	}
 
 	private final void validarLongitudPrimerApellido(final NombreCompletoClienteDomain dato) {
-		if(UtilTexto.longitudMaximaValida(dato.getPrimerApellido(),10)) {
+		if(!UtilTexto.longitudMaximaValida(dato.getPrimerApellido(),10)) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000053);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
@@ -58,12 +58,12 @@ public final class NombreCompletoClienteValidationRule implements ValidationRule
 	}
 
 	private final void validadLongitudSegundoApellido(final NombreCompletoClienteDomain dato) {
-		if(UtilTexto.longitudMaximaValida(dato.getSegundoApellido(),10)) {
+		if(!UtilTexto.longitudMaximaValida(dato.getSegundoApellido(),10)) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000054);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
-		
 	}
+		
 	
 	private final void validarFormato(final NombreCompletoClienteDomain dato) {
 		validarFormatoPrimerNombre(dato);

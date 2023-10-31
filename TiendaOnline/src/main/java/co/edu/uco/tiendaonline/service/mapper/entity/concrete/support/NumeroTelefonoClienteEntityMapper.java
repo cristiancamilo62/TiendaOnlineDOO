@@ -11,6 +11,10 @@ import co.edu.uco.tiendaonline.service.mapper.entity.EntityMapper;
 public final class NumeroTelefonoClienteEntityMapper implements EntityMapper<NumeroTelefonoClienteEntity, NumeroTelefonoClienteDomain>{
 
 	private static final EntityMapper<NumeroTelefonoClienteEntity, NumeroTelefonoClienteDomain> instancia = new NumeroTelefonoClienteEntityMapper();
+	
+	private NumeroTelefonoClienteEntityMapper() {
+		super();
+	}
 	@Override
 	public final NumeroTelefonoClienteDomain toDomain(final NumeroTelefonoClienteEntity entity) {
 		if(UtilObjeto.esNulo(entity)) {

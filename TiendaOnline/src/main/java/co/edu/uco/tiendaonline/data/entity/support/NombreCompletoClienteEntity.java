@@ -55,11 +55,6 @@ public class NombreCompletoClienteEntity {
 	private final void setSegundoApellido(final String segundoApellido) {
 		this.segundoApellido = UtilTexto.obtenerValorDefecto(segundoApellido);
 	}
-	@Override
-	public String toString() {
-		return "NombreCompletoClienteEntity [primerNombre=" + primerNombre + ", segundoNombre=" + segundoNombre
-				+ ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + "]";
-	}
 	
 	
 	

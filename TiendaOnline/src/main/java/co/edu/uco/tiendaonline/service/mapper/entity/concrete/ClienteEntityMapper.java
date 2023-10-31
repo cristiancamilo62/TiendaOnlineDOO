@@ -26,7 +26,7 @@ public final class ClienteEntityMapper implements EntityMapper<ClienteEntity, Cl
 			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000041);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
 		}
-		return ClienteDomain.crear(entity.getId(),TipoIdentificacionEntityMapper.convertToDomain(entity.getTipoIdentificacion()), entity.getIdentificacion(),
+		return ClienteDomain.crear(entity.getId(),null, entity.getIdentificacion(),
 				NombreCompletoClienteEntityMapper.convertToDomain(entity.getNombreCompleto()), CorreoElectronicoClienteEntityMapper.convertToDomain(entity.getCorreoElectronico()),
 				NumeroTelefonoClienteEntityMapper.convertToDomain(entity.getNumeroTelefono()), entity.getFechaNacimiento());
 	}
@@ -38,7 +38,7 @@ public final class ClienteEntityMapper implements EntityMapper<ClienteEntity, Cl
 			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000042);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
 		}
-		return ClienteEntity.crear(domain.getId(), TipoIdentificacionEntityMapper.convertToEntity(domain.getTipoIdentificacion()), domain.getIdentificacion(),
+		return ClienteEntity.crear(domain.getId(), null , domain.getIdentificacion(),
 				NombreCompletoClienteEntityMapper.convertToEntity(domain.getNombreCompleto()), CorreoElectronicoClienteEntityMapper.convertToEntity(domain.getCorreoElectronico()),
 				NumeroTelefonoClienteEntityMapper.convertToEntity(domain.getNumeroTelefono()), domain.getFechaNacimiento());
 	}

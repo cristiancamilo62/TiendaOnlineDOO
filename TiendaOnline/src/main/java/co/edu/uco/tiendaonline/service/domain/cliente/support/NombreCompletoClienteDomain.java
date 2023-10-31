@@ -1,5 +1,6 @@
 package co.edu.uco.tiendaonline.service.domain.cliente.support;
 
+import co.edu.uco.tiendaonline.crosscutting.util.UtilTexto;
 
 public final class NombreCompletoClienteDomain {
 	
@@ -7,6 +8,13 @@ public final class NombreCompletoClienteDomain {
 	private String segundoNombre;
 	private String primerApellido;
 	private String segundoApellido;
+	
+	public NombreCompletoClienteDomain() {
+		setPrimerNombre(UtilTexto.VACIO);
+		setSegundoNombre(UtilTexto.VACIO);
+		setPrimerApellido(UtilTexto.VACIO);
+		setSegundoApellido(UtilTexto.VACIO);
+	}
 	
 	private NombreCompletoClienteDomain(final String primerNombre, final String segundoNombre, final String primerApellido,
 			final String segundoApellido) {
@@ -19,7 +27,9 @@ public final class NombreCompletoClienteDomain {
 			final String segundoApellido) {
 		return new NombreCompletoClienteDomain(primerNombre, segundoNombre, primerApellido, segundoApellido);
 	}
-	
+	public static final NombreCompletoClienteDomain crear() {
+		return new NombreCompletoClienteDomain();
+	}
 	public final String getPrimerNombre() {
 		return primerNombre;
 	}

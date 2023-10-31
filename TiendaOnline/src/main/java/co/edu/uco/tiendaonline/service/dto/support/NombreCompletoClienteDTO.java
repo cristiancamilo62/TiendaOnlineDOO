@@ -21,7 +21,14 @@ public class NombreCompletoClienteDTO {
 		setPrimerApellido(primerApellido);
 		setSegundoApellido(segundoApellido);
 	}
+	public static final NombreCompletoClienteDTO crear(final String primerNombre, final String segundoNombre, final String primerApellido,
+			final String segundoApellido) {
+		return new NombreCompletoClienteDTO(primerNombre, segundoNombre, primerApellido, segundoApellido);
+	}
 	
+	public static final NombreCompletoClienteDTO crear() {
+		return new NombreCompletoClienteDTO();
+	}
 	public final String getPrimerNombre() {
 		return primerNombre;
 	}

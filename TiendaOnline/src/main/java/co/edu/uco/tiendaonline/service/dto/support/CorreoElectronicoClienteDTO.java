@@ -15,6 +15,14 @@ public class CorreoElectronicoClienteDTO {
 		setCorreoElectronico(correoElectronico);
 		setCorreoElectronicoConfirmado(correoElectronicoConfirmado);
 	}
+	
+	public static final CorreoElectronicoClienteDTO crear(final String correoElectronico, final boolean correoElectronicoConfirmado) {
+		return new CorreoElectronicoClienteDTO(correoElectronico, correoElectronicoConfirmado);
+	}
+	
+	public static final CorreoElectronicoClienteDTO crear() {
+		return new CorreoElectronicoClienteDTO();
+	}
 	public final String getCorreoElectronico() {
 		return correoElectronico;
 	}

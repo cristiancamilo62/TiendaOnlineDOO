@@ -20,7 +20,7 @@ public final class CorreoElectronicoClienteValidationRule implements ValidationR
 	}
 
 	@Override
-	public void validar(final CorreoElectronicoClienteDomain dato) {
+	public final void validar(final CorreoElectronicoClienteDomain dato) {
 		validarLongitud(dato);
 		validarObligatoriedad(dato);
 		validarFormato(dato);

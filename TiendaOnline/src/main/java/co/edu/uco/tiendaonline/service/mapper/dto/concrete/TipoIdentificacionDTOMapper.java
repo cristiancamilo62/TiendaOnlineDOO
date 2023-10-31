@@ -5,7 +5,6 @@ import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnli
 import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
 import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilObjeto;
-import co.edu.uco.tiendaonline.data.entity.TipoIdentificacionEntity;
 import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.TipoIdentificacionDomain;
 import co.edu.uco.tiendaonline.service.dto.TipoIdentificacionDTO;
 import co.edu.uco.tiendaonline.service.mapper.dto.DTOMapper;
@@ -44,7 +43,7 @@ public class TipoIdentificacionDTOMapper implements DTOMapper<TipoIdentificacion
 		return instancia.toDomain(entity);
 	}
 	
-	public static final TipoIdentificacionDTO convertToEntity(final TipoIdentificacionDomain domain) {
+	public static final TipoIdentificacionDTO convertToDTO(final TipoIdentificacionDomain domain) {
 		return instancia.toDTO(domain);
 	}
 

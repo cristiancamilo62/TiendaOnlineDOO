@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnlineException;
+import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
+import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilObjeto;
 import co.edu.uco.tiendaonline.data.dao.ClienteDAO;
 import co.edu.uco.tiendaonline.data.dao.daofactory.DAOFactory;
@@ -24,7 +26,7 @@ public final class RegistrarClienteUseCase implements UseCase<ClienteDomain>{
 	}
 	
 	@Override
-	public void execute(ClienteDomain domain) {
+	public final void execute(ClienteDomain domain) {
 		
 		RegistrarClienteValidator.ejecutarValidacion(domain);
 		
@@ -48,7 +50,6 @@ public final class RegistrarClienteUseCase implements UseCase<ClienteDomain>{
 	private final void validarNoExistenciaClienteConMismoIdentificacion(final String identificacion) {
 		 var entity = crearClienteEntityIdentificacion(identificacion);
 		    var resultados = getClienteDAO().consultar(entity);
-		    
 		    if (!resultados.isEmpty()) {
 		        String mensajeUsuario = "Ya existe cliente con el número de identificación: " + identificacion;
 		        throw ServiceTiendaOnlineException.crear(mensajeUsuario);
@@ -69,16 +70,15 @@ public final class RegistrarClienteUseCase implements UseCase<ClienteDomain>{
 		    }
 	}
 	private ClienteEntity crearClienteEntityCorreoElectronico(final CorreoElectronicoClienteDomain correoElectronico) {
-	    var domain = ClienteDomain.crear(null, null, correoElectronico.getCorreoElectronico(), null, null, null, null);
+	    var domain = ClienteDomain.crear(null, null, null, null, correoElectronico, null, null);
 	    return ClienteEntityMapper.convertToEntity(domain);
 	}
 	
 	private final void validarNoExistenciaClienteConMismoNumeroTelefono(final NumeroTelefonoClienteDomain numeroTelefono) {
 		 var entity = crearClienteEntityNumeroTelefono(numeroTelefono);
 		    var resultados = getClienteDAO().consultar(entity);
-		    
 		    if (!resultados.isEmpty()) {
-		        String mensajeUsuario = "Ya existe cliente con el numero de teléfono : " + numeroTelefono;
+		        String mensajeUsuario = "Ya existe cliente con el numero de teléfono : " + numeroTelefono.toString();
 		        throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		    }
 	}
@@ -96,7 +96,7 @@ public final class RegistrarClienteUseCase implements UseCase<ClienteDomain>{
 			optional = getClienteDAO().consultarPorId(uuid);
 		}while(optional.isPresent());
 		
-		return ClienteDomain.crear(domain.getId(), domain.getTipoIdentificacion(), domain.getIdentificacion(),
+		return ClienteDomain.crear(uuid, domain.getTipoIdentificacion(), domain.getIdentificacion(),
 				domain.getNombreCompleto(), domain.getCorreoElectronico(), domain.getNumeroTelefono(), domain.getFechaNacimiento());
 	}
 	
@@ -111,16 +111,10 @@ public final class RegistrarClienteUseCase implements UseCase<ClienteDomain>{
 
 	public final void setFactory(final DAOFactory factoria) {
 		if(UtilObjeto.esNulo(factoria)) {
-			var mensajeUsuario = "";//CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000029);
-			var mensajeTecnico = "";//CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000030);
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000117);
+			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000118);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario, mensajeTecnico);
 		}
 		this.factoria = factoria;
 	}
-	
-	
-	
-	
-	
-
 }

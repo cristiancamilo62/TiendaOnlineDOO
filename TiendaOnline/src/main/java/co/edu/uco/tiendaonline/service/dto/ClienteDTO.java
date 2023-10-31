@@ -20,9 +20,9 @@ public class ClienteDTO {
 	private Date fechaNacimiento;
 	
 	
-	public ClienteDTO(UUID id, TipoIdentificacionDTO tipoIdentificacion, String identificacion,
-			NombreCompletoClienteDTO nombreCompleto, CorreoElectronicoClienteDTO correoElectronico,
-			NumeroTelefonoClienteDTO numeroTelefono, Date fechaNacimiento) {
+	public ClienteDTO(final UUID id, final TipoIdentificacionDTO tipoIdentificacion, final String identificacion,
+			final NombreCompletoClienteDTO nombreCompleto, final CorreoElectronicoClienteDTO correoElectronico,
+			final NumeroTelefonoClienteDTO numeroTelefono, final Date fechaNacimiento) {
 		setId(id);
 		setTipoIdentificacionDTO(tipoIdentificacion);
 		setIdentificacion(identificacion);
@@ -42,6 +42,14 @@ public class ClienteDTO {
 		setFechaNacimiento(UtilDate.crearFechaPorDefecto());
 	}
 
+	public static final ClienteDTO crear(final UUID id, final TipoIdentificacionDTO tipoIdentificacion, final String identificacion,
+			final NombreCompletoClienteDTO nombreCompleto, final CorreoElectronicoClienteDTO correoElectronico,
+			final NumeroTelefonoClienteDTO numeroTelefono, final Date fechaNacimiento) {
+		return new ClienteDTO(id, tipoIdentificacion, identificacion, nombreCompleto, correoElectronico, numeroTelefono, fechaNacimiento);
+	}
+	public static final ClienteDTO crear() {
+		return new ClienteDTO();
+	}
 
 	public final UUID getId() {
 		return id;

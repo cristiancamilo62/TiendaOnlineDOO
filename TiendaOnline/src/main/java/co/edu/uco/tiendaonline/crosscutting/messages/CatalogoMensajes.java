@@ -97,7 +97,7 @@ public class CatalogoMensajes {
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000028, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema en el metodo toEntity de la clase "
 				+ "TipoIdentificacionEntityMapper.No es posible mapear un tipo de Identificación Entity a partir de un domain de tipo Identificación entity nula."));
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000029, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema tratando de llevar a cabo el "
-				+ "registro de la inofrmación del nuevo tipo de identificación"));
+				+ "registro de la información del nuevo tipo de identificación"));
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000030, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema en el metodo setFactoria de la clase"
 				+ " RegistrarTipoIdentificacionUseCase debido a que la factoria con la cual se desea crear esta nula."));
 		
@@ -278,6 +278,44 @@ public class CatalogoMensajes {
 		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000111, TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "Se ha presentado un problema inesperado de tipo Excepcion en el metodo ejecutarConsulta de la clase"
 				+ "ClienteSQLServerDAO tratando de recuperar los datos de la consulta del cliente deseada."
 				+ "por favor revise el problema presentado para así poder identificar que sucedio"));
+		
+		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000112, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema tratando de llevar a cabo la "
+				+ "modificacion de la información del nuevo tipo de identificación"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000113, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema en el metodo setFactoria de la clase"
+				+ " ModificarTipoIdentificacionUseCase debido a que la factoria con la cual se desea crear esta nula."));
+		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000114, TipoMensaje.USUARIO, CategoriaMensaje.ERROR,"Se ha presentado un problema inesperado tratando de modificar un tipo de identificación"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000115, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"Se ha presentado un problema de tipo Excepcion en el metodo execute de la clase ModificarTipoIdentificacionFacade"
+				+ "tratando de modificar un tipo de identificacion. Por favor verifique la traza completa del error presentado, para así "
+				+ "poder diagnosticar con mayor certeza lo que sucedio."));
+		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000116, TipoMensaje.USUARIO, CategoriaMensaje.ERROR,"Se ha presentado un problema inesperado tratando de eliminar un tipo de identificación"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000117, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"Se ha presentado un problema de tipo Excepcion en el metodo execute de la clase EliminarTipoIdentificacionFacade"
+				+ "tratando de eliminar un tipo de identificacion. Por favor verifique la traza completa del error presentado, para así "
+				+ "poder diagnosticar con mayor certeza lo que sucedio."));
+		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000118, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema tratando de llevar a cabo el "
+				+ "registro de la información del nuevo cliente"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000119, TipoMensaje.USUARIO, CategoriaMensaje.FATAL, "Se ha presentado un problema en el metodo setFactoria de la clase"
+				+ " RegistrarClientUseCase debido a que la factoria con la cual se desea crear esta nula."));
+		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000120, TipoMensaje.USUARIO, CategoriaMensaje.ERROR,"Se ha presentado un problema inesperado tratando de registrar un nuevo cliente"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000121, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"Se ha presentado un problema de tipo Excepcion en el metodo execute de la clase RegistrarClienteFacade"
+				+ "tratando de registrar Un nuevo cliente. Por favor verifique la traza completa del error presentado, para así "
+				+ "poder diagnosticar con mayor certeza lo que sucedio."));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000122, TipoMensaje.USUARIO, CategoriaMensaje.ERROR,"Se ha presentado un problema inesperado tratando de eliminar un nuevo cliente"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000123, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"Se ha presentado un problema de tipo Excepcion en el metodo execute de la clase EliminarClienteFacade"
+				+ "tratando de eliminar Un nuevo cliente. Por favor verifique la traza completa del error presentado, para así "
+				+ "poder diagnosticar con mayor certeza lo que sucedio."));
+		
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000124, TipoMensaje.USUARIO, CategoriaMensaje.ERROR,"Se ha presentado un problema inesperado tratando de modificar un nuevo cliente"));
+		agregarMensaje(Mensaje.crear(CodigoMensaje.M0000125, TipoMensaje.TECNICO, CategoriaMensaje.ERROR,"Se ha presentado un problema de tipo Excepcion en el metodo execute de la clase ModioficarClienteFacade"
+				+ "tratando de modificar un cliente. Por favor verifique la traza completa del error presentado, para así "
+				+ "poder diagnosticar con mayor certeza lo que sucedio."));
+	
+	
+	
 	}
 
 	private static void agregarMensaje(final Mensaje mensaje) {

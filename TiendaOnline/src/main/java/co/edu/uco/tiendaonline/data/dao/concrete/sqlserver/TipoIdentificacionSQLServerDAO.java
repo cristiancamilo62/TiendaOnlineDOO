@@ -51,15 +51,13 @@ public final class TipoIdentificacionSQLServerDAO extends SQLDAO implements Tipo
 
 	@Override
 	public final void modificar(final TipoIdentificacionEntity entity) {
-		if(!UtilObjeto.esNulo(consultarPorId(entity.getId()))) {
 			final String sentencia = formarSentenciaModificar(entity);
 			try(final PreparedStatement sentenciaPreparada = getConexion().prepareStatement(sentencia)){
-				
+				//TODO: organizar colocar parametros
 				sentenciaPreparada.setString(1, entity.getCodigo());
 				sentenciaPreparada.setString(2, entity.getNombre());
-				sentenciaPreparada.setBoolean(3, entity.isEstado());
-				sentenciaPreparada.setObject(4, entity.getId());
-				
+				//sentenciaPreparada.setBoolean(3, entity.isEstado());
+				sentenciaPreparada.setObject(3, entity.getId());
 				sentenciaPreparada.executeUpdate();
 		    } catch (SQLException excepcion) {
 		        String mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000070);
@@ -70,7 +68,6 @@ public final class TipoIdentificacionSQLServerDAO extends SQLDAO implements Tipo
 		        String mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000072);
 		        throw DataTiendaOnlineException.crear(excepcion, mensajeUsuario, mensajeTecnico);
 		    }
-		}
 		
 
 	}
@@ -179,7 +176,6 @@ public final class TipoIdentificacionSQLServerDAO extends SQLDAO implements Tipo
 		final var parametros = new ArrayList<>();
 
 		final String sentencia = formarSentenciaConsulta(entity,parametros);
-		System.out.println(sentencia);
 		try (final var sentenciaPreparada = getConexion().prepareStatement(sentencia)){
 			
 			var sentenciaP = colocarParametrosConsulta(sentenciaPreparada,parametros);

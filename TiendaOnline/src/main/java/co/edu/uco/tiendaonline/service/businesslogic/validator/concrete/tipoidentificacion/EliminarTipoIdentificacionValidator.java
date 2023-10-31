@@ -2,16 +2,14 @@ package co.edu.uco.tiendaonline.service.businesslogic.validator.concrete.tipoide
 
 import co.edu.uco.tiendaonline.service.businesslogic.validator.Validator;
 import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.TipoIdentificacionDomain;
-import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.rules.CodigoTipoIdentificacionValidationRule;
 import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.rules.IdTipoIdentificacionValidationRule;
-import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.rules.NombreTipoIdentificacionValidationRule;
 import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.rules.TipoIdentificacionValidationRule;
 
-public final class ModificarTipoIdentificacionValidator implements Validator<TipoIdentificacionDomain>{
+public final class EliminarTipoIdentificacionValidator implements Validator<TipoIdentificacionDomain>{
+
+	private static final Validator<TipoIdentificacionDomain> instancia = new EliminarTipoIdentificacionValidator();
 	
-	private static final Validator<TipoIdentificacionDomain> instancia = new ModificarTipoIdentificacionValidator();
-	
-	private ModificarTipoIdentificacionValidator() {
+	private EliminarTipoIdentificacionValidator() {
 		super();
 	}
 	
@@ -23,11 +21,7 @@ public final class ModificarTipoIdentificacionValidator implements Validator<Tip
 	public final void execute(final TipoIdentificacionDomain data) {
 		TipoIdentificacionValidationRule.ejecutarValidacion(data);
 		IdTipoIdentificacionValidationRule.ejecutarValidacion(data.getId());
-		CodigoTipoIdentificacionValidationRule.ejecutarValidacion(data.getCodigo());
-		NombreTipoIdentificacionValidationRule.ejecutarValidacion(data.getNombre());
 		
 	}
-
 	
-
 }

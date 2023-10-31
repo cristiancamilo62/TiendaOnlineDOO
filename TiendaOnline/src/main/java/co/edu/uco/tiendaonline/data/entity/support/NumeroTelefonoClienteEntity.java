@@ -21,8 +21,8 @@ public class NumeroTelefonoClienteEntity {
 		return new NumeroTelefonoClienteEntity(numeroTelefono, numeroTelefonoConfirmado);
 	}
 	
-	public static final NombreCompletoClienteEntity crear() {
-		return new NombreCompletoClienteEntity();
+	public static final NumeroTelefonoClienteEntity crear() {
+		return new NumeroTelefonoClienteEntity();
 	}
 
 	public final String getNumeroTelefono() {

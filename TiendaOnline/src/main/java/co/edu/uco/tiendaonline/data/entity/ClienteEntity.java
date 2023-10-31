@@ -3,12 +3,8 @@ package co.edu.uco.tiendaonline.data.entity;
 import java.sql.Date;
 import java.util.UUID;
 
-import org.springframework.core.style.ToStringCreator;
-
-import ch.qos.logback.classic.pattern.Util;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilDate;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilObjeto;
-import co.edu.uco.tiendaonline.crosscutting.util.UtilTexto;
 import co.edu.uco.tiendaonline.data.entity.support.CorreoElectronicoClienteEntity;
 import co.edu.uco.tiendaonline.data.entity.support.NombreCompletoClienteEntity;
 import co.edu.uco.tiendaonline.data.entity.support.NumeroTelefonoClienteEntity;
@@ -51,7 +47,7 @@ import co.edu.uco.tiendaonline.data.entity.support.NumeroTelefonoClienteEntity;
 	}
 	
 	private final void setNombreCompleto(final NombreCompletoClienteEntity nombreCompleto) {
-		this.nombreCompleto = UtilObjeto.obtenerValorDefecto(nombreCompleto,new NombreCompletoClienteEntity());
+		this.nombreCompleto = UtilObjeto.obtenerValorDefecto(nombreCompleto, new NombreCompletoClienteEntity());
 	}
 	
 	private final void setCorreoElectronico(final CorreoElectronicoClienteEntity correoElectronico) {
@@ -90,12 +86,6 @@ import co.edu.uco.tiendaonline.data.entity.support.NumeroTelefonoClienteEntity;
 
 	public final Date getFechaNacimiento() {
 		return fechaNacimiento;
-	}
-	
-	public static void main(String[] args) {
-		NombreCompletoClienteEntity a = NombreCompletoClienteEntity.crear(null, null, null, null);
-		ClienteEntity c = ClienteEntity.crear(null, null, null, a, null, null, null);
-		System.out.println(c.toString());
 	}
 	
 	

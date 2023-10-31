@@ -52,7 +52,7 @@ public final class  UtilTexto {
 		return aplicarTrim(valor).length()>= longitudMinima;
 	}
 	public static final boolean longitudMaximaValida(final String valor, final int longitudMaxima) {
-		return aplicarTrim(valor).length()<= longitudMaxima;
+		return aplicarTrim(valor).length() <= longitudMaxima;
 	}
 	public static final boolean longitudValida(final String valor, final int longitudMinima, final int longitudMaxima) {
 		return longitudMinimaValida(valor, longitudMinima) && longitudMaximaValida(valor, longitudMaxima);

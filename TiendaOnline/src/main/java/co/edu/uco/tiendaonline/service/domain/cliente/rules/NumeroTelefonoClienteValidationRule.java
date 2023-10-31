@@ -44,7 +44,7 @@ public final class NumeroTelefonoClienteValidationRule implements ValidationRule
 	}
 
 	private final void validarLongitud(final NumeroTelefonoClienteDomain dato) {
-		if(UtilTexto.longitudValida(dato.getNumeroTelefono(), 10, 10)) {
+		if(!UtilTexto.longitudValida(dato.getNumeroTelefono(), 10, 10)) {
 			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000066);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}

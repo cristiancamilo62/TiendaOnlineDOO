@@ -21,9 +21,9 @@ public final class ClienteValidationRule implements ValidationRule<ClienteDomain
 	}
 
 	@Override
-	public void validar(ClienteDomain dato) {
-		if(!UtilObjeto.esNulo(dato)) {
-			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000044);
+	public final void validar(final ClienteDomain dato) {
+		if(UtilObjeto.esNulo(dato)) {
+			var mensajeUsuario = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000043);
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
 		

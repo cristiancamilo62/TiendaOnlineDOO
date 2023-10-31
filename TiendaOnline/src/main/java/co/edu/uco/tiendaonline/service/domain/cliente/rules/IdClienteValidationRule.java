@@ -1,4 +1,4 @@
-package co.edu.uco.tiendaonline.service.domain.tipoidentificacion.rules;
+package co.edu.uco.tiendaonline.service.domain.cliente.rules;
 
 import java.util.UUID;
 
@@ -6,11 +6,12 @@ import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnli
 import co.edu.uco.tiendaonline.crosscutting.util.UtilUuid;
 import co.edu.uco.tiendaonline.service.domain.ValidationRule;
 
-public final class IdTipoIdentificacionValidationRule  implements ValidationRule<UUID>{
+public final class IdClienteValidationRule implements ValidationRule<UUID>{
 	
-	private static final ValidationRule<UUID> instancia = new IdTipoIdentificacionValidationRule();
+
+	private static final ValidationRule<UUID> instancia = new IdClienteValidationRule();
 	
-	private IdTipoIdentificacionValidationRule() {
+	private IdClienteValidationRule() {
 		super();
 	}
 	
@@ -25,10 +26,9 @@ public final class IdTipoIdentificacionValidationRule  implements ValidationRule
 	}
 	private final void validarIdPorDefecto(final UUID id) {
 		if(UtilUuid.valorDefecto(id)) {
-			var mensajeUsuario = "El id del tipo de identificacion es el valor por defecto";
+			var mensajeUsuario = "El id del cliente es el valor por defecto";
 			throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 		}
-	}
-	
+	}	
 
 }
