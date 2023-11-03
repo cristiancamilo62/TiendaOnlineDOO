@@ -105,6 +105,7 @@ public final class RegistrarTipoIdentificacionUseCase  implements UseCase<TipoId
 		this.factoria = factoria;
 	}
 
+
 	
 	
 }

@@ -1,165 +1,40 @@
 package co.edu.uco.tiendaonline.controller.tipoidentificacion;
 
 import java.util.UUID;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uco.tiendaonline.controller.support.response.Respuesta;
-import co.edu.uco.tiendaonline.crosscutting.exception.TiendaOnlineException;
-import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.TipoIdentificacionDomain;
 import co.edu.uco.tiendaonline.service.dto.TipoIdentificacionDTO;
-import co.edu.uco.tiendaonline.service.facade.concrete.tipoidentificacion.ConsultarPorIdTipoIdentificacionFacade;
-import co.edu.uco.tiendaonline.service.facade.concrete.tipoidentificacion.EliminarTipoIdentificacionFacade;
-import co.edu.uco.tiendaonline.service.facade.concrete.tipoidentificacion.ModificarTipoIdentificacionFacade;
-import co.edu.uco.tiendaonline.service.facade.concrete.tipoidentificacion.RegistrarTipoIdentificacionFacade;
-import co.edu.uco.tiendaonline.service.mapper.dto.concrete.TipoIdentificacionDTOMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-@RestController
-@RequestMapping("/api/v1/tipoidentificacion")
-public class TipoIdentificacionController {
+@Tag(name = "TipoIdentificacionAPI", description = "Ofrece las api de consumo con todas las operaciones relaciones con TipoIdentificación")
+public interface TipoIdentificacionController {
 	
-	@GetMapping("/dummy")
-	public final TipoIdentificacionDTO obtenerDummy() {
-		return TipoIdentificacionDTO.crear();
-	}
+	@Operation(summary = "Obtener Dummy", description = "Servicio encargado de obtener la estructura basica de un JSON básica de un tipoIdentipicacion")
+	TipoIdentificacionDTO obtenerDummy();
 
-	@GetMapping
-	public final TipoIdentificacionDTO consultar(@RequestBody TipoIdentificacionDTO dto) {
-		return dto;
-	}
+	@Operation(summary = "consultar", description = "Servicio que se encarga de obtener todos los tipos de identificacion que cumplen con los parametros de de filtrado")
+	ResponseEntity<Respuesta<TipoIdentificacionDTO>> consultar(@RequestBody TipoIdentificacionDTO dto);
 	
-	@GetMapping("/{id}")
-	public final ResponseEntity<Respuesta<TipoIdentificacionDTO>> consultarPorId(@PathVariable("id") UUID id) {
-		
-		final Respuesta<TipoIdentificacionDTO> respuesta = new Respuesta<>();
-		
-		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
-		
-		
-		try {
-			
-			var domain =  TipoIdentificacionDomain.crear(id, null, null, false);
-			TipoIdentificacionDTO dto = TipoIdentificacionDTOMapper.convertToDTO(domain);
-			
-			ConsultarPorIdTipoIdentificacionFacade facade = new ConsultarPorIdTipoIdentificacionFacade();
-			facade.execute(dto);
-			codigoHttp = HttpStatus.OK;
-			respuesta.getMensajes().add("El tipo de identificación se ha consultado exitosamente");
-			
-		} catch (final TiendaOnlineException excepcion) {
-			respuesta.getMensajes().add(excepcion.getMensajeUsuario());
-			System.err.println(excepcion.getMensajeTecnico());
-			System.err.println(excepcion.getLugar());
-			excepcion.getExceptionRaiz().printStackTrace();
-			//TODO: hacer logger de la excepcion
-			
-		}catch (final Exception excepcion) {
-			respuesta.getMensajes().add("se ha presentado un problema tratando de consultar el tipo de identificacion");
-			excepcion.printStackTrace();
-			//TODO: hacer logger de la excepcion
-		}
-		return new ResponseEntity<>(respuesta,codigoHttp);
-	}
+	@Operation(summary = "consultar PorbId", description = "Servicio que se encarga de obtener la información del tipo de identificacion que cumplen el id parametro del Id")
+	ResponseEntity<Respuesta<TipoIdentificacionDTO>> consultarPorId(@PathVariable("id") UUID id);
 	
-
-	@PostMapping()
-	public final ResponseEntity<Respuesta<TipoIdentificacionDTO>> registrar(@RequestBody TipoIdentificacionDTO dto) {
-		
-		final Respuesta<TipoIdentificacionDTO> respuesta = new Respuesta<>();
-		
-		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
-		
-		try {
-			
-			RegistrarTipoIdentificacionFacade facade = new RegistrarTipoIdentificacionFacade();
-			facade.execute(dto);
-			codigoHttp = HttpStatus.OK;
-			respuesta.getMensajes().add("El tipo de identificación se ha registrado exitosamente");
-			
-		} catch (final TiendaOnlineException excepcion) {
-			respuesta.getMensajes().add(excepcion.getMensajeUsuario());
-			System.err.println(excepcion.getMensajeTecnico());
-			System.err.println(excepcion.getLugar());
-			excepcion.getExceptionRaiz().printStackTrace();
-			//TODO: hacer logger de la excepcion
-			
-		}catch (final Exception excepcion) {
-			respuesta.getMensajes().add("se ha presentado un problema tratando de resgistrar el tipo de identificacion");
-			excepcion.printStackTrace();
-			//TODO: hacer logger de la excepcion
-		}
-		return new ResponseEntity<>(respuesta,codigoHttp);
-	}
+	@Operation(summary = "Registrar", description = "Servicio que se encarga de registrar toda la información de un Tipo de Identificacion")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Tipo de identificacion registrado exitosamente"),
+			 @ApiResponse(responseCode = "400", description = "Tipo de identificacion no registrado exitosamente por algun error conocido"),
+			 @ApiResponse(responseCode = "500", description = "Tipo de identificacion no registrado exitosamente por un problema desconocido")})		
+	ResponseEntity<Respuesta<TipoIdentificacionDTO>> registrar(@RequestBody TipoIdentificacionDTO dto) ;
 	
-	@PutMapping("{id}")
-	public final ResponseEntity<Respuesta<TipoIdentificacionDTO>> modificar(@PathVariable("id") UUID id,@RequestBody TipoIdentificacionDTO dto) {
-		final Respuesta<TipoIdentificacionDTO> respuesta = new Respuesta<>();
-		
-		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
-		
-		try {
-			
-			ModificarTipoIdentificacionFacade facade = new ModificarTipoIdentificacionFacade();
-			facade.execute(dto);
-			codigoHttp = HttpStatus.OK;
-			respuesta.getMensajes().add("El tipo de identificación se ha modificado exitosamente");
-			
-		} catch (final TiendaOnlineException excepcion) {
-			respuesta.getMensajes().add(excepcion.getMensajeUsuario());
-			System.err.println(excepcion.getMensajeTecnico());
-			System.err.println(excepcion.getLugar());
-			excepcion.getExceptionRaiz().printStackTrace();
-			//TODO: hacer logger de la excepcion
-			
-		}catch (final Exception excepcion) {
-			respuesta.getMensajes().add("se ha presentado un problema tratando de modificar el tipo de identificacion");
-			excepcion.printStackTrace();
-			//TODO: hacer logger de la excepcion
-		}
-		return new ResponseEntity<>(respuesta,codigoHttp);
-	}
+	@Operation(summary = "Modificar", description = "Servicio que se encarga de modificar los datos de un tipo de identificacion por medio de el id")
+	ResponseEntity<Respuesta<TipoIdentificacionDTO>> modificar(@PathVariable("id") UUID id,@RequestBody TipoIdentificacionDTO dto) ;
 	
-	@DeleteMapping("/{id}")
-	public final ResponseEntity<Respuesta<TipoIdentificacionDTO>> eliminar(@PathVariable("id") UUID id) {
-		final Respuesta<TipoIdentificacionDTO> respuesta = new Respuesta<>();
-		
-		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
-		
-		try {
-			
-			var domain =  TipoIdentificacionDomain.crear(id, null, null, false);
-			TipoIdentificacionDTO dto = TipoIdentificacionDTOMapper.convertToDTO(domain);
-			
-			EliminarTipoIdentificacionFacade facade = new EliminarTipoIdentificacionFacade();
-			facade.execute(dto);
-			codigoHttp = HttpStatus.OK;
-			respuesta.getMensajes().add("El tipo de identificación se ha eliminado exitosamente");
-			
-		} catch (final TiendaOnlineException excepcion) {
-			respuesta.getMensajes().add(excepcion.getMensajeUsuario());
-			System.err.println(excepcion.getMensajeTecnico());
-			System.err.println(excepcion.getLugar());
-			excepcion.getExceptionRaiz().printStackTrace();
-			//TODO: hacer logger de la excepcion
-			
-		}catch (final Exception excepcion) {
-			respuesta.getMensajes().add("se ha presentado un problema tratando de eliminar el tipo de identificacion");
-			excepcion.printStackTrace();
-			//TODO: hacer logger de la excepcion
-		}
-		return new ResponseEntity<>(respuesta,codigoHttp);
-	}
-
-	
+	@Operation(summary = "eliminar", description = "Servicio que se encarga de eliminar la información de un tipo de identificacion por medio del parametro id")
+	ResponseEntity<Respuesta<TipoIdentificacionDTO>> eliminar(@PathVariable("id") UUID id) ;
 
 
 }

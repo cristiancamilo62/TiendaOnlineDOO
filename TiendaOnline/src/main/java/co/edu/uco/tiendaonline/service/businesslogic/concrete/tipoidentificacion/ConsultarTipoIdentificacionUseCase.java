@@ -1,6 +1,5 @@
-package co.edu.uco.tiendaonline.service.businesslogic.concrete.tipoidentificacion;
 
-import java.util.UUID;
+package co.edu.uco.tiendaonline.service.businesslogic.concrete.tipoidentificacion;
 
 import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnlineException;
 import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
@@ -8,35 +7,28 @@ import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilObjeto;
 import co.edu.uco.tiendaonline.data.dao.TipoIdentificacionDAO;
 import co.edu.uco.tiendaonline.data.dao.daofactory.DAOFactory;
-import co.edu.uco.tiendaonline.data.entity.TipoIdentificacionEntity;
 import co.edu.uco.tiendaonline.service.businesslogic.UseCaseRetorno;
 import co.edu.uco.tiendaonline.service.domain.tipoidentificacion.TipoIdentificacionDomain;
 import co.edu.uco.tiendaonline.service.mapper.entity.concrete.TipoIdentificacionEntityMapper;
 
-public final class ConsultarPorIdTipoIdentificacionUseCase implements UseCaseRetorno<TipoIdentificacionDomain>{
+public final class ConsultarTipoIdentificacionUseCase implements UseCaseRetorno<TipoIdentificacionDomain>{
 
-	
 	private DAOFactory factoria;
 	
-	public ConsultarPorIdTipoIdentificacionUseCase(final DAOFactory factoria) {
+	public ConsultarTipoIdentificacionUseCase(final DAOFactory factoria) {
 		setFactoria(factoria);
 	}
 	
 	@Override
-	public Object executeRetorno(final TipoIdentificacionDomain domain) {
-		var entity = crearTipoIdentificacionEntityIdAConsultar(domain.getId());
-	    var resultados = getTipoIdentificacionDAO().consultarPorId(entity.getId());
+	public Object executeRetorno(TipoIdentificacionDomain domain) {
+		var entity = TipoIdentificacionEntityMapper.convertToEntity(domain);
+	    var resultados = getTipoIdentificacionDAO().consultar(entity);
 	    if (resultados.isEmpty()) {
 	        String mensajeUsuario = "No existe el tipo de identificacion con el identificar que se desea consultar";
 	        throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 	    }
 	    return resultados;	
 	}
-	private TipoIdentificacionEntity crearTipoIdentificacionEntityIdAConsultar(final UUID id) {
-	    var domain = TipoIdentificacionDomain.crear(id, null, null, false);
-	    return TipoIdentificacionEntityMapper.convertToEntity(domain);
-	}
-
 	
 	private final DAOFactory getFactoria() {
 		return factoria;
@@ -55,6 +47,5 @@ public final class ConsultarPorIdTipoIdentificacionUseCase implements UseCaseRet
 		this.factoria = factoria;
 	}
 
-	
 
 }

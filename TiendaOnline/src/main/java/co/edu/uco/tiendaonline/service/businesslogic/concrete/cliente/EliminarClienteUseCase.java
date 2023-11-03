@@ -65,6 +65,7 @@ public final class EliminarClienteUseCase implements UseCase<ClienteDomain> {
 		}
 		this.factoria = factoria;
 	}
+
 	
 	
 

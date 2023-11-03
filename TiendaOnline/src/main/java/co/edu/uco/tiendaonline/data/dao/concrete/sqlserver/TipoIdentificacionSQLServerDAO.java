@@ -271,6 +271,7 @@ public final class TipoIdentificacionSQLServerDAO extends SQLDAO implements Tipo
 			var mensajeTecnico = CatalogoMensajes.obtenerContenidoMensaje(CodigoMensaje.M0000090);
 			throw DataTiendaOnlineException.crear(excepcion, mensajeUsuario, mensajeTecnico);
 		}
+		System.out.println(listaResultados.size());
 		return listaResultados;
 	}
 

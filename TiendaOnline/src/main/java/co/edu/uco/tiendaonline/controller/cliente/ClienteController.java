@@ -17,6 +17,7 @@ import co.edu.uco.tiendaonline.controller.support.response.Respuesta;
 import co.edu.uco.tiendaonline.crosscutting.exception.TiendaOnlineException;
 import co.edu.uco.tiendaonline.service.domain.cliente.ClienteDomain;
 import co.edu.uco.tiendaonline.service.dto.ClienteDTO;
+import co.edu.uco.tiendaonline.service.facade.concrete.cliente.ConsultarClienteFacade;
 import co.edu.uco.tiendaonline.service.facade.concrete.cliente.ConsultarPorIdClienteFacade;
 import co.edu.uco.tiendaonline.service.facade.concrete.cliente.EliminarClienteFacade;
 import co.edu.uco.tiendaonline.service.facade.concrete.cliente.ModificarClienteFacade;
@@ -122,9 +123,9 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/{id}")
-	public final ResponseEntity<Respuesta<ClienteDTO>> consultarPorId(@PathVariable("id") UUID id) {
+	public final ResponseEntity<Object> consultarPorId(@PathVariable("id") UUID id) {
 		
-		final Respuesta<ClienteDTO> respuesta = new Respuesta<>();
+		final Respuesta<Object> respuesta = new Respuesta<>();
 		
 		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
 		
@@ -135,7 +136,7 @@ public class ClienteController {
 			ClienteDTO dto = ClienteDTOMapper.convertToDTO(domain);
 			
 			ConsultarPorIdClienteFacade facade = new ConsultarPorIdClienteFacade();
-			facade.execute(dto);
+			 respuesta.getDatos().add(facade.executeRetorno(dto));
 			codigoHttp = HttpStatus.OK;
 			respuesta.getMensajes().add("El cliente se ha consultado exitosamente");
 			
@@ -154,7 +155,36 @@ public class ClienteController {
 		return new ResponseEntity<>(respuesta,codigoHttp);
 	}
 	
-
+	@GetMapping
+	public final ResponseEntity<Object> consultar(@RequestBody ClienteDTO dto) {
+		
+		final Respuesta<Object> respuesta = new Respuesta<>();
+		
+		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
+		
+		
+		try {
+			ConsultarClienteFacade facade = new ConsultarClienteFacade();
+			
+			respuesta.getDatos().add(facade.executeRetorno(dto)) ;
+			codigoHttp = HttpStatus.OK;
+			respuesta.getMensajes().add("El cliente se ha consultado exitosamente");
+			
+		} catch (final TiendaOnlineException excepcion) {
+			respuesta.getMensajes().add(excepcion.getMensajeUsuario());
+			System.err.println(excepcion.getMensajeTecnico());
+			System.err.println(excepcion.getLugar());
+			excepcion.getExceptionRaiz().printStackTrace();
+			//TODO: hacer logger de la excepcion
+			
+		}catch (final Exception excepcion) {
+			respuesta.getMensajes().add("se ha presentado un problema tratando de consultar el cliente");
+			excepcion.printStackTrace();
+			//TODO: hacer logger de la excepcion
+		}
+		return new ResponseEntity<>(respuesta,codigoHttp);
+	}
+	
 
 
 }

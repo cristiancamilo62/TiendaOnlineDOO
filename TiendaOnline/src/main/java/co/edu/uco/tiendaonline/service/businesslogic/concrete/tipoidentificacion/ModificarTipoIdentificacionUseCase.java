@@ -101,9 +101,5 @@ public final class ModificarTipoIdentificacionUseCase implements UseCase<TipoIde
 		}
 		this.factoria = factoria;
 	}
-	
-	
-	
-	
 
 }

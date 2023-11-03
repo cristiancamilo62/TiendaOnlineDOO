@@ -1,6 +1,5 @@
 package co.edu.uco.tiendaonline.service.businesslogic.concrete.cliente;
 
-import java.util.UUID;
 
 import co.edu.uco.tiendaonline.crosscutting.exception.concrete.ServiceTiendaOnlineException;
 import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
@@ -8,34 +7,30 @@ import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.crosscutting.util.UtilObjeto;
 import co.edu.uco.tiendaonline.data.dao.ClienteDAO;
 import co.edu.uco.tiendaonline.data.dao.daofactory.DAOFactory;
-import co.edu.uco.tiendaonline.data.entity.ClienteEntity;
 import co.edu.uco.tiendaonline.service.businesslogic.UseCaseRetorno;
 import co.edu.uco.tiendaonline.service.domain.cliente.ClienteDomain;
 import co.edu.uco.tiendaonline.service.mapper.entity.concrete.ClienteEntityMapper;
 
-public final class ConsultarPorIdClienteUseCase implements UseCaseRetorno<ClienteDomain>{
+public final class ConsultarClienteUseCase implements UseCaseRetorno<ClienteDomain>{
+	
 
+	private DAOFactory factoria;
 	
-private DAOFactory factoria;
-	
-	public ConsultarPorIdClienteUseCase(final DAOFactory factoria) {
+	public ConsultarClienteUseCase(final DAOFactory factoria) {
 		setFactoria(factoria);
 	}
-	
+
 	@Override
-	public final Object executeRetorno(final ClienteDomain domain) {
-		var entity = crearClienteEntityIdAConsultar(domain.getId());
-	    var resultados = getClienteDAO().consultarPorId(entity.getId());
+	public Object executeRetorno(ClienteDomain domain) {
+		var entity = ClienteEntityMapper.convertToEntity(domain);;
+	    var resultados = getClienteDAO().consultar(entity);
 	    if (resultados.isEmpty()) {
 	        String mensajeUsuario = "No existe el cliente con el identificar que se desea consultar";
 	        throw ServiceTiendaOnlineException.crear(mensajeUsuario);
 	    }
 	    return resultados;
 	}
-	private ClienteEntity crearClienteEntityIdAConsultar(final UUID id) {
-	    var domain = ClienteDomain.crear(id, null, null, null, null, null, null);
-	    return ClienteEntityMapper.convertToEntity(domain);
-	}
+	
 	private final DAOFactory getFactoria() {
 		return factoria;
 	}
@@ -52,6 +47,6 @@ private DAOFactory factoria;
 		}
 		this.factoria = factoria;
 	}
-	
+
 
 }

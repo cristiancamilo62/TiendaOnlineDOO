@@ -67,6 +67,6 @@ public final class EliminarTipoIdentificacionUseCase implements UseCase<TipoIden
 		}
 		this.factoria = factoria;
 	}
-	
+
 	
 }

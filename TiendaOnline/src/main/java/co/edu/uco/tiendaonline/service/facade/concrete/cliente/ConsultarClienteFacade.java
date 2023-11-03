@@ -6,18 +6,19 @@ import co.edu.uco.tiendaonline.crosscutting.messages.CatalogoMensajes;
 import co.edu.uco.tiendaonline.crosscutting.messages.enumerator.CodigoMensaje;
 import co.edu.uco.tiendaonline.data.dao.daofactory.DAOFactory;
 import co.edu.uco.tiendaonline.data.dao.daofactory.TipoDAOFactory;
-import co.edu.uco.tiendaonline.service.businesslogic.concrete.cliente.ConsultarPorIdClienteUseCase;
+import co.edu.uco.tiendaonline.service.businesslogic.concrete.cliente.ConsultarClienteUseCase;
 import co.edu.uco.tiendaonline.service.domain.cliente.ClienteDomain;
 import co.edu.uco.tiendaonline.service.domain.cliente.rules.ClienteValidationRule;
 import co.edu.uco.tiendaonline.service.dto.ClienteDTO;
 import co.edu.uco.tiendaonline.service.facade.FacadeRetorno;
 import co.edu.uco.tiendaonline.service.mapper.dto.concrete.ClienteDTOMapper;
 
-public final class ConsultarPorIdClienteFacade implements FacadeRetorno<ClienteDTO>{
+public final class ConsultarClienteFacade implements FacadeRetorno<ClienteDTO>{
+
+	
 
 	@Override
 	public final Object executeRetorno(final ClienteDTO dto) {
-		
 		Object resultado;
 		
 		final ClienteDomain domain = ClienteDTOMapper.convertToDomain(dto);
@@ -28,7 +29,7 @@ public final class ConsultarPorIdClienteFacade implements FacadeRetorno<ClienteD
 		try {
 			daoFactory.iniciarTransaccion();
 			
-			var useCase = new ConsultarPorIdClienteUseCase(daoFactory);
+			var useCase = new ConsultarClienteUseCase(daoFactory);
 			resultado =  useCase.executeRetorno(domain);
 			
 			daoFactory.confirmarTransacion();
@@ -46,5 +47,6 @@ public final class ConsultarPorIdClienteFacade implements FacadeRetorno<ClienteD
 		}
 		return resultado;
 	}
+
 
 }
